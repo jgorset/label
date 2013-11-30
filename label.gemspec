@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Johannes Gorset"]
   spec.email         = ["jgorset@gmail.com"]
   spec.description   = "Labels gems in your Gemfile"
-  spec.summary       = "Label labels the gems in your Gemfie"
+  spec.summary       = "Label labels the gems in your Gemfile"
   spec.homepage      = "https://github.com/jgorset/label"
   spec.license       = "MIT"
 
