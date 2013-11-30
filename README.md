@@ -22,10 +22,12 @@ gem 'rails', '4.0.0'
 # Flexible authentication solution for Rails with Warden
 gem 'devise'
 
-# Upload files in your Ruby applications, map them to a range of ORMs, store them on different backends.
+# Upload files in your Ruby applications, map them to a range of ORMs, store
+# them on different backends.
 gem 'carrierwave'
 
-# RailsAdmin is a Rails engine that provides an easy-to-use interface for managing your data.
+# RailsAdmin is a Rails engine that provides an easy-to-use interface for
+# managing your data.
 gem 'rails_admin'
 ```
 
