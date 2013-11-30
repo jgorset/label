@@ -12,6 +12,7 @@ Label labels the gems in your Gemfile.
     $ label
 
 ```ruby
+# /path/to/Gemfile
 
 source 'http://rubygems.org'
 
