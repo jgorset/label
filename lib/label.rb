@@ -24,7 +24,7 @@ module Label
       processed_lines = []
 
       lines.each_with_index do |line, i|
-        gem = line[/gem ['"](.+)['"]/, 1]
+        gem = line[/gem ['"](.+?)['"]/, 1]
 
         if gem
           previous_line = lines[i - 1]
