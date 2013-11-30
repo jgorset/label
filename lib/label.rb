@@ -8,15 +8,22 @@ module Label
   class << self
 
     def label
-      output = process "Gemfile"
+      describing = lambda { |gem| STDOUT.write "#{gem}: " }
+      described  = lambda { |description| STDOUT.puts description }
+
+      output = process "Gemfile", describing, described
 
       write "Gemfile", output
     end
     
     # Process the given Gemfile.
     #
-    # gemfile - A String describing the path to a Gemfile.
-    def process gemfile
+    # gemfile    - A String describing the path to a Gemfile.
+    # describing - A Proc to be called once a query to describe a gem begins.
+    #              Receives the name of the gem as an argument.
+    # described  - A Proc to be called once a query to describe a gem completes.
+    #              Receives the description as an argument.
+    def process gemfile, describing = nil, described = nil
       file = read gemfile
 
       lines = file.read.split "\n"
@@ -33,7 +40,13 @@ module Label
           gem        = matches[2]
 
           unless previous_line.start_with? "#"
-            processed_lines << "#{whitespace}# #{describe gem}"
+            describing.call gem if describing
+
+            description = describe gem
+
+            described.call description if described
+
+            processed_lines << "#{whitespace}# #{description}"
           end
         end
 
