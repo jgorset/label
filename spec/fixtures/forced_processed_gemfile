@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+
+# Flexible authentication solution for Rails with Warden
+gem 'devise'
+
+# Upload files in your Ruby applications, map them to a range of ORMs, store them on different backends.
+gem 'carrierwave'

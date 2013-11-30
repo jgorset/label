@@ -1,0 +1,6 @@
+source 'https://rubygems.org'
+
+# Authentication
+gem 'devise'
+
+gem 'carrierwave'

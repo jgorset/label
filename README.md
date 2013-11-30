@@ -31,8 +31,6 @@ gem 'carrierwave'
 gem 'rails_admin'
 ```
 
-Existing labels are kept by default, but you can set `--force` to overwrite them.
-
 ## I love you
 
 Johannes Gorset made this. You should [tweet me](http://twitter.com/jgorset) if you can't get

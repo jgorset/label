@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+
+# Authentication
+gem 'devise'
+
+# Upload files in your Ruby applications, map them to a range of ORMs, store them on different backends.
+gem 'carrierwave'
