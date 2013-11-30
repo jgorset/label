@@ -1,6 +1,13 @@
 source 'https://rubygems.org'
 
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '4.0.0'
+
 # Authentication
 gem 'devise'
 
 gem 'carrierwave'
+
+group :test do
+  gem 'rspec'
+end

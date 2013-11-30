@@ -24,13 +24,16 @@ module Label
       processed_lines = []
 
       lines.each_with_index do |line, i|
-        gem = line[/gem ['"](.+?)['"]/, 1]
+        matches = line.match /^( *)gem ['"](.+?)['"]/
 
-        if gem
+        if matches
           previous_line = lines[i - 1]
 
+          whitespace = matches[1]
+          gem        = matches[2]
+
           unless previous_line.start_with? "#"
-            processed_lines << "# #{describe gem}"
+            processed_lines << "#{whitespace}# #{describe gem}"
           end
         end
 

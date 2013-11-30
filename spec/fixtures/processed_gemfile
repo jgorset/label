@@ -1,7 +1,15 @@
 source 'https://rubygems.org'
 
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '4.0.0'
+
 # Authentication
 gem 'devise'
 
 # Upload files in your Ruby applications, map them to a range of ORMs, store them on different backends.
 gem 'carrierwave'
+
+group :test do
+  # BDD for Ruby
+  gem 'rspec'
+end
