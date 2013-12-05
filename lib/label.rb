@@ -11,9 +11,11 @@ module Label
       describing = lambda { |gem| STDOUT.write "#{gem}: " }
       described  = lambda { |description| STDOUT.puts description }
 
-      output = process "Gemfile", describing, described
+      gemfile = "Gemfile"
 
-      write "Gemfile", output
+      output = process gemfile, describing, described
+
+      write gemfile, output
     end
     
     # Process the given Gemfile.
@@ -39,7 +41,7 @@ module Label
           whitespace = matches[1]
           gem        = matches[2]
 
-          unless previous_line.start_with? "#"
+          unless previous_line =~ /^ *#/
             describing.call gem if describing
 
             description = describe gem

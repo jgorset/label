@@ -3,11 +3,11 @@ require "spec_helper"
 describe Label do
   describe "#process" do
     it "should label unlabelled gems" do
-      expect(File).to receive(:open).with("Gemfile").and_return(StringIO.new fixture("stock_gemfile"))
+      allow(File).to receive(:open).with("Gemfile").and_return(StringIO.new fixture("stock_gemfile"))
 
-      expect(subject).to receive(:describe).with("rspec").and_return("BDD for Ruby")
+      allow(subject).to receive(:describe).with("rspec").and_return("BDD for Ruby")
 
-      expect(subject).to receive(:describe).with("carrierwave").and_return(
+      allow(subject).to receive(:describe).with("carrierwave").and_return(
         "Upload files in your Ruby applications, map them to a range of ORMs, " + 
         "store them on different backends."
       )

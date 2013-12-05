@@ -10,4 +10,6 @@ gem 'carrierwave'
 
 group :test do
   gem 'rspec'
+  # Guard is a command line tool to easily handle events on file system modifications.
+  gem 'guard'
 end
