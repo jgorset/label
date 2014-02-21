@@ -31,6 +31,12 @@ gem 'carrierwave'
 gem 'rails_admin'
 ```
 
+Oh, and let's be real; you will always want to use label.
+
+```bash
+alias bundle="bundle && label"
+```
+
 ## I love you
 
 Johannes Gorset made this. You should [tweet me](http://twitter.com/jgorset) if you can't get
