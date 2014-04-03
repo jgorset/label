@@ -1,4 +1,5 @@
 require "label/version"
+require "label/gemspec_info"
 require "optparse"
 require "ostruct"
 require "gems"
@@ -77,11 +78,21 @@ module Label
 
     # Describe the given gem.
     #
-    # gem - A String describing the name of a gem.
+    # gem    - A String describing the name of a gem.
+    # source - A hash with the gem source options, posible values:
+    #           - rubygems
+    #           - github
+    #           - path
+    #           - git
     #
     # Returns a String.
-    def describe gem
-      Gems.info(gem).fetch "info"
+    def describe gem, source = { rubygems: true }
+      if source[:rubygems]
+        Gems.info(gem).fetch "info"
+      else
+        info = GemspecInfo.new gem, source
+        info.summary
+      end
     end
 
   end
