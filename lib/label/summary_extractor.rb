@@ -1,4 +1,5 @@
 module Label
+  # A class to extract the summary from the contents of a gemspec file
   class SummaryExtractor
     attr_reader :content
 
@@ -14,7 +15,7 @@ module Label
 
     def extract_summary
       STRING_REGEXPS.each do |regexp|
-        md = content.match(/s\.summary\s+=\s+#{regexp}/)
+        md = content.match(/\w+\.summary\s+=\s+#{regexp}/)
         return md[:content] if md
       end
       return ""
