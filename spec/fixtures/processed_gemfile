@@ -15,3 +15,10 @@ group :test do
   # Guard is a command line tool to easily handle events on file system modifications.
   gem 'guard'
 end
+
+group :development
+  # Label labels the gems in your Gemfile
+  gem 'label', path: './'
+  # An IRB alternative and runtime developer console
+  gem 'pry', github: 'pry/pry', branch: 'development'
+end
