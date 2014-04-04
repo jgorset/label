@@ -31,13 +31,24 @@ module Label
     #
     # Returns a string with the gemspec file content
     def fetch_gemspec_content!
-      return fetch_gemspec_content_from_git!    if source[:git]
+      case source_name
+      when :git
+        fetch_gemspec_content_from_git!
+      when :github
+        fetch_gemspec_content_from_github!
+      when :path
+        fetch_gemspec_content_from_path!
+      else
+        ""
+      end
+    end
 
-      return fetch_gemspec_content_from_github! if source[:github]
-
-      return fetch_gemspec_content_from_path!   if source[:path]
-
-      return ""
+    # returns a symbol of the defined source
+    # it could be :git, :github, :path, etc
+    def source_name
+      [:git, :github, :path].each do |source_name|
+        return source_name if source[source_name]
+      end
     end
 
     # for simplicity git protocol calls that match with a github repo
