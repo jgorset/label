@@ -1,4 +1,5 @@
 require "label/version"
+require "label/gemspec_info"
 require "optparse"
 require "ostruct"
 require "gems"
@@ -17,7 +18,7 @@ module Label
 
       write gemfile, output
     end
-    
+
     # Process the given Gemfile.
     #
     # gemfile    - A String describing the path to a Gemfile.
@@ -40,11 +41,12 @@ module Label
 
           whitespace = matches[1]
           gem        = matches[2]
+          source     = extract_source_and_options line
 
           unless previous_line =~ /^ *#/
             describing.call gem if describing
 
-            description = describe gem
+            description = describe gem, source
 
             described.call description if described
 
@@ -77,11 +79,37 @@ module Label
 
     # Describe the given gem.
     #
-    # gem - A String describing the name of a gem.
+    # gem    - A String describing the name of a gem.
+    # source - A hash with the gem source options, posible values:
+    #           - rubygems
+    #           - github
+    #           - path
+    #           - git
     #
     # Returns a String.
-    def describe gem
-      Gems.info(gem).fetch "info"
+    def describe gem, source = { rubygems: true }
+      if source[:rubygems]
+        Gems.info(gem).fetch "info"
+      else
+        info = GemspecInfo.new gem, source
+        info.summary
+      end
+    end
+
+    private
+
+    # Exctract the source options form a Gemfile gem declaration
+    # as :github, :path and/or :branch and return a Hash with those options
+    # :rubygems is the default
+    def extract_source_and_options line
+      source = {}
+      options = line.split ","
+      options[1, options.length - 1].each do |option|
+        args = option.split(":").map {|arg| arg.strip.gsub(/('|\")/, '') }
+        source[args.first.to_sym] = args.last
+      end
+      source[:rubygems] = true if source.empty?
+      source
     end
 
   end
