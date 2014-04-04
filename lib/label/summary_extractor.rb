@@ -18,7 +18,6 @@ module Label
         md = content.match(/\w+\.summary\s+=\s+#{regexp}/)
         return md[:content] if md
       end
-      return ""
     end
   end
 end
