@@ -28,6 +28,12 @@ describe Label::SummaryExtractor do
       include_examples "extracts summary", "A series of generators an other rails \"defaults\" for my 'projects'"
     end
 
+    context "for strings defined with %Q{}" do
+      let(:content) { "s.email       = [\"fespinozacast@gmail.com\"]\n  s.homepage    = \"fespinoza.github.io\"\n  s.summary     = %Q{A series of generators an other rails \"defaults\" for my 'projects'}\n  s.description = \"TODO.\"\n  s.license     = \"MIT\"\n\n" }
+
+      include_examples "extracts summary", "A series of generators an other rails \"defaults\" for my 'projects'"
+    end
+
     context "for different gem configuration variable names" do
       let(:content) { "g.email       = [\"fespinozacast@gmail.com\"]\n  g.homepage    = \"fespinoza.github.io\"\n  g.summary     = %q{A series of generators an other rails \"defaults\" for my 'projects'}\n  g.description = \"TODO.\"\n  g.license     = \"MIT\"\n\n" }
 

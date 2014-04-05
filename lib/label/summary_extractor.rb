@@ -6,7 +6,7 @@ module Label
     STRING_REGEXPS = [
       /\"(?<content>[^"]*)\"/,
       /'(?<content>[^']*)'/,
-      /%q\{(?<content>[^}]*)\}/,
+      /%q\{(?<content>[^}]*)\}/i
     ]
 
     def initialize content
@@ -18,6 +18,8 @@ module Label
         md = content.match(/\w+\.summary\s+=\s+#{regexp}/)
         return md[:content] if md
       end
+
+      nil
     end
   end
 end
