@@ -8,11 +8,9 @@ module Label
 
   class << self
 
-    def label
+    def label gemfile = "Gemfile"
       describing = lambda { |gem| STDOUT.write "#{gem}: " }
       described  = lambda { |description| STDOUT.puts description }
-
-      gemfile = "Gemfile"
 
       output = process gemfile, describing, described
 

@@ -2,4 +2,8 @@
 
 require "label"
 
-Label.label
+if ARGV.any?
+  Label.label ARGV.first
+else
+  Label.label
+end
