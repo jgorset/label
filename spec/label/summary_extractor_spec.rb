@@ -40,5 +40,10 @@ describe Label::SummaryExtractor do
       include_examples "extracts summary", "A series of generators an other rails \"defaults\" for my 'projects'"
     end
 
+    context "for summaries that don't exist at all" do
+      let(:content) { "s.email       = [\"fespinozacast@gmail.com\"]\n  s.homepage    = \"fespinoza.github.io\"\n  s.description = \"TODO.\"\n  s.license     = \"MIT\"\n\n" }
+
+      include_examples "extracts summary", nil
+    end
   end
 end
