@@ -1,4 +1,4 @@
-Label is written and maintained by Johannes Gorset and various contributors:
+Label is written and maintained by [Johannes Gorset](https://github.com/jgorset) and various contributors:
 
-* Felipe Espinoza
-* Tim Kurvers
+* [Felipe Espinoza](https://github.com/fespinoza)
+* [Tim Kurvers](https://github.com/timkurvers)
