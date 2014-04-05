@@ -1,5 +1,11 @@
 # Label
 
+[![Gem Version](https://img.shields.io/gem/v/label.svg)](https://rubygems.org/gems/label)
+[![Build Status](https://img.shields.io/travis/jgorset/label.svg)](https://travis-ci.org/jgorset/label)
+[![Dependency Status](https://img.shields.io/gemnasium/jgorset/label.svg)](https://gemnasium.com/jgorset/label)
+[![Code Climate](https://img.shields.io/codeclimate/github/jgorset/label.svg)](https://codeclimate.com/github/jgorset/label)
+[![Coverage Status](https://img.shields.io/coveralls/jgorset/label.svg)](https://coveralls.io/r/jgorset/label)
+
 Label labels the gems in your Gemfile.
 
 ## Installation
