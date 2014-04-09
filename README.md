@@ -14,11 +14,10 @@ Label labels the gems in your Gemfile.
 
 ## Usage
 
-    $ cd /path/to/Gemfile
     $ label
 
-Label will look for a `Gemfile` in your current working directory, but you can also
-tell it to look somewhere else:
+Label will look for a `Gemfile` in your current working directory, but you can
+tell it to look somewhere else if you like:
 
     $ label /path/to/Gemfile
 
