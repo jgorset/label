@@ -14,16 +14,11 @@ Label labels the gems in your Gemfile.
 
 ## Usage
 
-    $ label
-
-Label will look for a `Gemfile` in your current working directory, but you can
-tell it to look somewhere else if you like:
-
-    $ label /path/to/Gemfile
+```zsh
+$ label
+```
 
 ```ruby
-# /path/to/Gemfile
-
 source 'http://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -39,6 +34,13 @@ gem 'carrierwave'
 # RailsAdmin is a Rails engine that provides an easy-to-use interface for
 # managing your data.
 gem 'rails_admin'
+```
+
+Label will look for a `Gemfile` in your current working directory by default, but you can
+tell it to look somewhere else if you like:
+
+```zsh
+$ label /path/to/Gemfile
 ```
 
 Oh, and let's be real; you will always want to use label.
