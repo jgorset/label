@@ -1,5 +1,11 @@
 # Label
 
+[![Gem Version](https://img.shields.io/gem/v/label.svg)](https://rubygems.org/gems/label)
+[![Build Status](https://img.shields.io/travis/jgorset/label.svg)](https://travis-ci.org/jgorset/label)
+[![Dependency Status](https://img.shields.io/gemnasium/jgorset/label.svg)](https://gemnasium.com/jgorset/label)
+[![Code Climate](https://img.shields.io/codeclimate/github/jgorset/label.svg)](https://codeclimate.com/github/jgorset/label)
+[![Coverage Status](https://img.shields.io/coveralls/jgorset/label.svg)](https://coveralls.io/r/jgorset/label)
+
 Label labels the gems in your Gemfile.
 
 ## Installation
@@ -8,16 +14,12 @@ Label labels the gems in your Gemfile.
 
 ## Usage
 
-    $ cd /path/to/Gemfile
-    $ label
+```zsh
+$ label
+```
 
 ```ruby
-# /path/to/Gemfile
-
 source 'http://rubygems.org'
-
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
 
 # Flexible authentication solution for Rails with Warden
 gem 'devise'
@@ -31,10 +33,11 @@ gem 'carrierwave'
 gem 'rails_admin'
 ```
 
-Oh, and let's be real; you will always want to use label.
+Label will look for a `Gemfile` in your current working directory by default, but you can
+tell it to look somewhere else if you like:
 
-```bash
-alias bundle="bundle && label"
+```zsh
+$ label /path/to/Gemfile
 ```
 
 ## I love you
