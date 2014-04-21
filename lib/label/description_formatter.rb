@@ -4,40 +4,45 @@ module Label
     FIRST_SENTENCE_REGEXP = /(?<first_sentence>([^.]*https?:\/\/[^\s]*\..*\..*)|([^.]*\.))(?<rest>.*)/
     CHARACTERS_PER_LINE = 90
 
-    def self.format input_string, prepend_string = ''
-      if md = input_string.match(FIRST_SENTENCE_REGEXP)
-        formatted_description = md[:first_sentence].strip
-        if formatted_description.length > CHARACTERS_PER_LINE
-          break_in_lines formatted_description, prepend_string
-        else
-          "#{prepend_string} #{formatted_description}"
-        end
+    # Formats a description
+    #
+    # description - A description String to be formatted.
+    # separator   - A String to be used as aditional separator formatting
+    def self.format description, separator = ''
+      if md = description.match(FIRST_SENTENCE_REGEXP)
+        break_in_lines md[:first_sentence].strip, separator
       else
-        "#{prepend_string} #{input_string}"
+        "#{separator} #{description}"
       end
     end
 
-    def self.break_in_lines input_string, prepend_string = ''
-      # replace all line breaks for spaces
-      input_string.gsub!(/\n/, ' ')
-      input_string = "#{prepend_string} #{input_string}"
+    private
+
+    # split lines that are too long in multiple lines
+    def self.break_in_lines description, separator = ''
+      description.gsub!(/\n/, ' ')
+      description = "#{separator} #{description}"
 
       index = CHARACTERS_PER_LINE
-      while input_string.length > index
-
-        # get the previous space an insert a new line there
-        limit_char = input_string[index]
-        while limit_char != ' '
-          index -= 1
-          limit_char = input_string[index]
-        end
-        new_line_string = "\n#{prepend_string} "
-        input_string[index] = new_line_string
-
+      while description.length > index
+        index = previous_space_index description, index
+        new_line_string = "\n#{separator} "
+        description[index] = new_line_string
         index += CHARACTERS_PER_LINE + new_line_string.length
       end
+      description
+    end
 
-      input_string
+    # given a string returns and an index returns the index of the first previous
+    # space character in the given string
+    def self.previous_space_index description, index
+      limit_char = description[index]
+      while limit_char != ' '
+        index -= 1
+        limit_char = description[index]
+      end
+      index
     end
   end
+
 end
