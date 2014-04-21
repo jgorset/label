@@ -1,5 +1,6 @@
 require "label/version"
 require "label/gemspec_info"
+require "label/description_formatter"
 require "optparse"
 require "ostruct"
 require "gems"
@@ -48,7 +49,7 @@ module Label
 
             described.call description if described
 
-            processed_lines << "#{whitespace}# #{description}"
+            processed_lines << format(description, "#{whitespace}#")
           end
         end
 
@@ -95,6 +96,10 @@ module Label
     end
 
     private
+
+    def format description, prepend_string
+      DescriptionFormatter.format description, prepend_string
+    end
 
     # Exctract the source options form a Gemfile gem declaration
     # as :github, :path and/or :branch and return a Hash with those options
