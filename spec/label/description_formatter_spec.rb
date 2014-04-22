@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'label/description_formatter'
 
 def format input_string, prepend_string = "#"
