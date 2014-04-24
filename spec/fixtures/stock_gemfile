@@ -8,6 +8,13 @@ gem 'devise'
 
 gem 'carrierwave'
 
+gem 'nokogiri'
+gem 'pg'
+
+group :production do
+  gem 'unicorn'
+end
+
 group :test do
   gem 'rspec'
   # Guard is a command line tool to easily handle events on file system modifications.
