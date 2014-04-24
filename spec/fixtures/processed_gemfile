@@ -35,3 +35,8 @@ group :development do
   # An IRB alternative and runtime developer console
   gem 'pry', github: 'pry/pry', branch: 'development'
 end
+
+group :development, :test do
+  # Rspec for Rails
+  gem 'rspec-rails', '~> 3.0.0.beta2'
+end

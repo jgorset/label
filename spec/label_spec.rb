@@ -49,6 +49,10 @@ describe Label do
       allow(subject).to receive(:describe).with("pry", github: "pry/pry", branch: "development")
         .and_return("An IRB alternative and runtime developer console")
 
+      allow(subject).to receive(:describe).with("rspec-rails", rubygems: true).and_return(
+        "Rspec for Rails"
+      )
+
       expect(subject.process("Gemfile")).to eq fixture("processed_gemfile")
     end
   end
