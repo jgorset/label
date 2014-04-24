@@ -21,7 +21,7 @@ group :test do
   gem 'guard'
 end
 
-group :development
+group :development do
   gem 'label', path: './'
   gem 'pry', github: 'pry/pry', branch: 'development'
 end

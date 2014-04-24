@@ -29,7 +29,7 @@ group :test do
   gem 'guard'
 end
 
-group :development
+group :development do
   # Label labels the gems in your Gemfile
   gem 'label', path: './'
   # An IRB alternative and runtime developer console
