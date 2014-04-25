@@ -108,8 +108,10 @@ module Label
       source = {}
       options = line.split ","
       options[1, options.length - 1].each do |option|
-        args = option.split(":").map {|arg| arg.strip.gsub(/('|\")/, '') }
-        source[args.first.to_sym] = args.last
+        if option.match(/:/)
+          args = option.split(":").map {|arg| arg.strip.gsub(/('|\")/, '') }
+          source[args.first.to_sym] = args.last
+        end
       end
       source[:rubygems] = true if source.empty?
       source

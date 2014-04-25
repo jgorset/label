@@ -21,7 +21,11 @@ group :test do
   gem 'guard'
 end
 
-group :development
+group :development do
   gem 'label', path: './'
   gem 'pry', github: 'pry/pry', branch: 'development'
+end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0.beta2'
 end
