@@ -49,7 +49,7 @@ describe Label do
       allow(subject).to receive(:describe).with("pry", github: "pry/pry", branch: "development")
         .and_return("An IRB alternative and runtime developer console")
 
-      allow(subject).to receive(:describe).with("rspec-rails", rubygems: true).and_return(
+      allow(subject).to receive(:describe).with("rspec-rails", rubygems: true, version: '~> 3.0.0.beta2').and_return(
         "Rspec for Rails"
       )
 

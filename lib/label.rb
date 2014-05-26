@@ -1,6 +1,7 @@
 require "label/version"
 require "label/gemspec_info"
 require "label/description_formatter"
+require "label/gem_options_extractor"
 require "optparse"
 require "ostruct"
 require "gems"
@@ -105,16 +106,9 @@ module Label
     # as :github, :path and/or :branch and return a Hash with those options
     # :rubygems is the default
     def extract_source_and_options line
-      source = {}
-      options = line.split ","
-      options[1, options.length - 1].each do |option|
-        if option.match(/:/)
-          args = option.split(":").map {|arg| arg.strip.gsub(/('|\")/, '') }
-          source[args.first.to_sym] = args.last
-        end
-      end
-      source[:rubygems] = true if source.empty?
-      source
+      extractor = GemOptionsExtractor.new line
+      extractor.extract!
+      extractor.gem_options
     end
 
   end
