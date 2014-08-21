@@ -1,9 +1,10 @@
 # encoding: utf-8
+
 require "spec_helper"
 
 describe Label do
   describe "#process" do
-    it "should label unlabelled gems" do
+    it "labels unlabelled gems" do
       allow(File).to receive(:open).with("Gemfile").and_return(StringIO.new fixture("stock_gemfile"))
 
       allow(subject).to receive(:describe).with("rspec", nil).and_return("BDD for Ruby")
