@@ -69,14 +69,14 @@ describe Label do
 
     it "raises when a given gem could not be found" do
       expect do
-        subject.describe("this-will-never-exist")
-      end.to raise_error Gem::LoadError
+        subject.describe("missing")
+      end.to raise_error Gem::LoadError, "Could not find 'missing' (>= 0)"
     end
 
     it "raises when requested version of a given gem could not be found" do
       expect do
-        subject.describe("bundler", "~> 1000.0.0")
-      end.to raise_error Gem::LoadError
+        subject.describe("bundler", "~> 1000.0")
+      end.to raise_error Gem::LoadError, "Could not find 'bundler' (~> 1000.0)"
     end
 
     it "raises when given version requirement is malformed" do

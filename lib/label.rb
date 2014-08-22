@@ -1,8 +1,9 @@
 require "label/version"
 require "label/description_formatter"
+
+require "bundler"
 require "optparse"
 require "ostruct"
-require "rubygems"
 
 module Label
 
@@ -79,17 +80,28 @@ module Label
 
     # Describe the given gem.
     #
-    # gem     - A String describing the name of a gem.
+    # name    - A String with the name of a gem.
     # version - A String describing the version of a gem.
     #
     # Returns a String.
-    def describe gem, version = nil
+    def describe name, version = nil
       requirement = Gem::Requirement.new(version)
-      spec = Gem::Specification.find_by_name(gem, requirement)
-      spec.summary
+
+      or_raise = -> do
+        raise Gem::LoadError.new("Could not find '#{name}' (#{requirement})")
+      end
+
+      specs.find or_raise do |spec|
+        spec.name == name &&
+        requirement.satisfied_by?(spec.version)
+      end.summary
     end
 
     private
+
+    def specs
+      @specs ||= Bundler.load.specs
+    end
 
     def format description, prepend_string
       DescriptionFormatter.format description, prepend_string
