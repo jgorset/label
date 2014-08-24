@@ -1,17 +1,18 @@
 require "label/version"
-require "label/gemspec_info"
 require "label/description_formatter"
-require "label/gem_options_extractor"
+
+require "bundler"
 require "optparse"
 require "ostruct"
-require "gems"
 
 module Label
 
   class << self
 
+    GEM_REGEXP = /^(?<whitespace> *)gem ['"](?<name>.+?)['"](:?, ['"](?<version>.+?)['"])?/
+
     def label gemfile = "Gemfile"
-      describing = lambda { |gem| STDOUT.write "#{gem}: " }
+      describing = lambda { |name| STDOUT.write "#{name}: " }
       described  = lambda { |description| STDOUT.puts description }
 
       output = process gemfile, describing, described
@@ -34,21 +35,21 @@ module Label
       processed_lines = []
 
       lines.each_with_index do |line, i|
-        matches = line.match /^( *)gem ['"](.+?)['"]/
+        match = line.match GEM_REGEXP
 
-        if matches
+        if match
           previous_line = lines[i - 1]
 
-          whitespace = matches[1]
-          gem        = matches[2]
-          source     = extract_source_and_options line
+          whitespace = match[:whitespace]
+          name       = match[:name]
+          version    = match[:version]
 
           unless previous_line =~ /^ *#/
-            describing.call gem if describing
+            describing.call(name) if describing
 
-            description = describe gem, source
+            description = describe(name, version)
 
-            described.call description if described
+            described.call(description) if described
 
             processed_lines << format(description, "#{whitespace}#")
           end
@@ -79,36 +80,31 @@ module Label
 
     # Describe the given gem.
     #
-    # gem    - A String describing the name of a gem.
-    # source - A hash with the gem source options, posible values:
-    #           - rubygems
-    #           - github
-    #           - path
-    #           - git
+    # name    - A String with the name of a gem.
+    # version - A String describing the version of a gem.
     #
     # Returns a String.
-    def describe gem, source = { rubygems: true }
-      if source[:rubygems]
-        Gems.info(gem).fetch "info"
-      else
-        info = GemspecInfo.new gem, source
-        info.summary
+    def describe name, version = nil
+      requirement = Gem::Requirement.new(version)
+
+      or_raise = -> do
+        raise Gem::LoadError.new("Could not find '#{name}' (#{requirement})")
       end
+
+      specs.find or_raise do |spec|
+        spec.name == name &&
+        requirement.satisfied_by?(spec.version)
+      end.summary
     end
 
     private
 
-    def format description, prepend_string
-      DescriptionFormatter.format description, prepend_string
+    def specs
+      @specs ||= Bundler.load.specs
     end
 
-    # Exctract the source options form a Gemfile gem declaration
-    # as :github, :path and/or :branch and return a Hash with those options
-    # :rubygems is the default
-    def extract_source_and_options line
-      extractor = GemOptionsExtractor.new line
-      extractor.extract!
-      extractor.gem_options
+    def format description, prepend_string
+      DescriptionFormatter.format description, prepend_string
     end
 
   end
