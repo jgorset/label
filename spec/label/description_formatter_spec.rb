@@ -14,6 +14,11 @@ describe Label::DescriptionFormatter do
       expect(format(description)).to eq "# #{description}"
     end
 
+    it 'ignores dots that do not end a sentence' do
+      description = "Ruby 2.0 is awesome"
+      expect(format(description)).to eq "# #{description}"
+    end
+
     context 'with long descriptions' do
       it 'returns the first sentence (ended by ".") for long descriptions' do
         long_description = "Nokogiri (é\u008B¸) is an HTML, XML, SAX, and Reader "+
@@ -43,7 +48,7 @@ describe Label::DescriptionFormatter do
       it 'returns the first sentence in multiple lines when this is too long' do
         long_description = "\\Unicorn is an HTTP server for Rack applications "+
           "designed to only serve\nfast clients on low-latency, high-bandwidth "+
-          "connections and take\nadvantage of features in Unix/Unix-like kernels."+
+          "connections and take\nadvantage of features in Unix/Unix-like kernels. "+
           "Slow clients should\nonly be served by placing a reverse proxy capable"+
           " of fully buffering\nboth the the request and response in between "+
           "\\Unicorn and slow clients."

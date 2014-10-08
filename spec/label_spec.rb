@@ -41,7 +41,7 @@ describe Label do
       allow(subject).to receive(:describe).with("unicorn", nil).and_return(
         "\\Unicorn is an HTTP server for Rack applications "+
         "designed to only serve\nfast clients on low-latency, high-bandwidth "+
-        "connections and take\nadvantage of features in Unix/Unix-like kernels."+
+        "connections and take\nadvantage of features in Unix/Unix-like kernels. "+
         "Slow clients should\nonly be served by placing a reverse proxy capable"+
         " of fully buffering\nboth the the request and response in between "+
         "\\Unicorn and slow clients."
