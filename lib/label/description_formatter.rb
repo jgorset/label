@@ -1,7 +1,7 @@
 module Label
   class DescriptionFormatter
 
-    FIRST_SENTENCE_REGEXP = /(?<first_sentence>([^.]*https?:\/\/[^\s]*\..*\..*)|([^.]*\.))(?<rest>.*)/
+    FIRST_SENTENCE_REGEXP = /(?<first_sentence>.+?(\.\s|\Z))/m
     CHARACTERS_PER_LINE = 90
 
     # Formats a description
