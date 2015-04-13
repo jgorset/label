@@ -6,7 +6,7 @@
 [![Code Climate](https://img.shields.io/codeclimate/github/jgorset/label.svg)](https://codeclimate.com/github/jgorset/label)
 [![Coverage Status](https://img.shields.io/coveralls/jgorset/label.svg)](https://coveralls.io/r/jgorset/label)
 
-Label labels the gems in your Gemfile.
+Label describes the gems in your Gemfile so you don't have to look them up to see what they do.
 
 ## Installation
 
