@@ -8,10 +8,6 @@
 
 Label describes the gems in your Gemfile so you don't have to look them up to see what they do.
 
-## Installation
-
-    $ gem install label
-
 ## Usage
 
 ```zsh
@@ -39,6 +35,10 @@ tell it to look somewhere else if you like:
 ```zsh
 $ label /path/to/Gemfile
 ```
+
+## Installation
+
+    $ gem install label
 
 ## I love you
 
