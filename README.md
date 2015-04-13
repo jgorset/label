@@ -10,9 +10,13 @@ Label describes the gems in your Gemfile so you don't have to look them up to se
 
 ## Usage
 
+Just run it:
+
 ```zsh
 $ label
 ```
+
+Then check out your beautiful new Gemfile:
 
 ```ruby
 source 'http://rubygems.org'
